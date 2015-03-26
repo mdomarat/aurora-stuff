@@ -1,0 +1,16 @@
+
+aur.py - a basic scraper for aurora. USE AT OWN RISK AND DON'T WRECK
+IT FOR ALL OF US.
+
+usage: python aur.py <crn_file>
+
+the format of the crn file is:
+--
+<TERMID> 
+<CRN1>
+<CRN2>
+...
+<CRNn>
+--
+The TERMID is a 6 digit identifier for the term, of the form YYYYXX where
+YYYY is the year and XX is {10,50,90} for {Winter,Summer,Fall}.
