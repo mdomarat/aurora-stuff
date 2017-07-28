@@ -20,13 +20,19 @@ for x in open(f,'r'):
     else:
       url = 'https://aurora.umanitoba.ca/banprod/bwckschd.p_disp_detail_sched?term_in=' + term + '&crn_in=' + crn 
       page = urllib2.urlopen(url)
+      out = ''
       for line in page:
         line = striphtml(line)
         if crn in line:
           print line.strip()
+        if 'Waitlist Seats' in line:
+          l1 = get_next(page) 
+          l2 = get_next(page) 
+          l3 = get_next(page) 
+          print out,'Waitlist',l2
+          break
         if 'Seats' in line:
           l1 = get_next(page) 
           l2 = get_next(page) 
           l3 = get_next(page) 
-          print 'capacity',l1,'actual',l2,'remaining',l3 
-          break
+          out = 'capacity %s actual %s remaining %s' % (l1,l2,l3)
