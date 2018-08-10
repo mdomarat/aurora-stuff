@@ -2,15 +2,8 @@
 aur.py - a basic scraper for aurora. USE AT OWN RISK AND DON'T WRECK
 IT FOR ALL OF US.
 
-usage: python aur.py <crn_file>
+Usage: <script> <termcode> <coursetypes>
+   termcode is of the form YYYYXX where YYYY is the year and XX is {10,50,90} for {Winter,Summer,Fall}.  2018 FALL is 201890
+   coursetypes is a subset of ABDTK (A=on campus lecture,B=lab,D=distance,T=variants,K=work terms)
 
-the format of the crn file is:
---
-<TERMID> 
-<CRN1>
-<CRN2>
-...
-<CRNn>
---
-The TERMID is a 6 digit identifier for the term, of the form YYYYXX where
-YYYY is the year and XX is {10,50,90} for {Winter,Summer,Fall}.
+
