@@ -56,8 +56,12 @@ def striphtml(data):
   return p.sub('', data)
 
 def get_next(page):
-  return striphtml(next(page)).strip()
-
+   ret = ""
+   try:
+      ret = striphtml(next(page)).strip()
+   except StopIteration:
+ 	 ret = None
+   return ret
 
 roomDict = dict()
 # termcode is the aurora standard 6 digit identifier for the term, of the form YYYYXX where
