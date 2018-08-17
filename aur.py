@@ -11,11 +11,12 @@ import requests
 #        implement better checking for when building is not found.
 #        beautifulsoup everything.
 
-buildings = ['AGRICULTURE', 'ALLEN', 'ANIMAL SCIENCE', 'ARMES', 'Art Lab', 'Music', 'DUFF ROBLIN', 'EDUCATION', 'ELLIS', 'FRANK KENNEDY', 'MACHRAY', 'Distance and On-Line Education', 'HELEN GLASS', 'EITC', 'TBA', 'DRAKE', 'ST. JOHN', 'ST. PAUL' ]
+buildings = ['AGRICULTURE', 'ALLEN', 'ANIMAL SCIENCE', 'ARMES', 'Art Lab', 'Music', 'DUFF ROBLIN', 'EDUCATION', 'ELLIS', 'FLETCHER ARGUE', 'FRANK KENNEDY', 'MACHRAY', 'Distance and On-Line Education', 'HELEN GLASS', 'EITC', 'TBA', 'DRAKE', 'ST. JOHN', 'ST. PAUL' ,'UNIVERSITY COLLEGE']
 
 #PULLED from AD-ASTRA August 2018. May be dated. Not trivial to automatically pull since it uses sessions in cookies
 roomCapacities = {
 	"ARMES 111" : "89",
+        "ARMES 201" : "111",
 	"ARMES 205" : "111",
 	"ARMES 208" : "199",
 	"DRAKE CENTRE 140" : "60",
@@ -34,10 +35,17 @@ roomCapacities = {
 	"EITC E2 320" : "81",
 	"EITC E2 350" : "81",
 	"EITC E2 351" : "40",
+        "FLETCHER ARGUE 100" : "158",
+        "FLETCHER ARGUE 200" : "287",
 	"HELEN GLASS CENTRE 260" : "108",
 	"HELEN GLASS CENTRE 350" : "20",
 	"ST. JOHN'S COLLEGE 204" : "33",
-	"TBA" : "(TBA)"
+        "UNIVERSITY COLLEGE 235" : "36",
+        "UNIVERSITY COLLEGE 237" : "128",
+        "UNIVERSITY COLLEGE 240" : "198",
+        "WALLACE 221" : "160",
+        "WALLACE 223" : "160",
+	"TBA" : "TBA"
 }
 
 def foundBldg ( line):
@@ -121,7 +129,7 @@ for crn in crns:
         if roomDict[crn] in roomCapacities:
           room += " (seats: "+str(roomCapacities[roomDict[crn]])+")";
         else:
-          room += " (seat capcity unknown)"
+          room += " (seat capacity unknown)"
 		  
         print ("\t",out,'Waitlist',l2, room)
         break
