@@ -4,9 +4,9 @@ import urllib2
 import re
 import requests
 
-#  aurora via requests for getting CRNs by Jim 
-#  ad-astra code by Jim, too. 
-#  TODO: add defaultdict for roomCapacities. 
+#  aurora via requests for getting CRNs by Jim
+#  ad-astra code by Jim, too.
+#  TODO: add defaultdict for roomCapacities.
 #        make sure list of buildings is exhaustive.
 #        implement better checking for when building is not found.
 #        beautifulsoup everything.
@@ -15,37 +15,41 @@ buildings = ['AGRICULTURE', 'ALLEN', 'ANIMAL SCIENCE', 'ARMES', 'Art Lab', 'Musi
 
 #PULLED from AD-ASTRA August 2018. May be dated. Not trivial to automatically pull since it uses sessions in cookies
 roomCapacities = {
-	"ARMES 111" : "89",
+        "ALLEN BUILDING 330" : "36",
+        "ARMES 111" : "89",
         "ARMES 201" : "111",
-	"ARMES 205" : "111",
-	"ARMES 208" : "199",
-	"DRAKE CENTRE 140" : "60",
-	"EDUCATION 224" : "152",
-	"EITC E2 105" : "114",
-	"EITC E2 110" : "126",
-	"EITC E2 125" : "81",
-	"EITC E2 130" : "81",
-	"EITC E2 150" : "81",
-	"EITC E2 155" : "81",
-	"EITC E2 160" : "81",
-	"EITC E2 164" : "25",
-	"EITC E2 165" : "76",
-	"EITC E2 304" : "46",
-	"EITC E2 310" : "25",
-	"EITC E2 320" : "81",
-	"EITC E2 350" : "81",
-	"EITC E2 351" : "40",
+        "ARMES 204" : "192",
+        "ARMES 205" : "111",
+        "ARMES 208" : "199",
+        "DRAKE CENTRE 140" : "60",
+        "EDUCATION 224" : "152",
+        "EITC E2 105" : "114",
+        "EITC E2 110" : "126",
+        "EITC E2 125" : "81",
+        "EITC E2 130" : "81",
+        "EITC E2 150" : "81",
+        "EITC E2 155" : "81",
+        "EITC E2 160" : "81",
+        "EITC E2 164" : "25",
+        "EITC E2 165" : "76",
+        "EITC E2 304" : "46",
+        "EITC E2 310" : "25",
+        "EITC E2 320" : "81",
+        "EITC E2 350" : "81",
+        "EITC E2 351" : "40",
+        "EITC E3 270" : "215",
         "FLETCHER ARGUE 100" : "158",
         "FLETCHER ARGUE 200" : "287",
-	"HELEN GLASS CENTRE 260" : "108",
-	"HELEN GLASS CENTRE 350" : "20",
-	"ST. JOHN'S COLLEGE 204" : "33",
+        "HELEN GLASS CENTRE 260" : "108",
+        "HELEN GLASS CENTRE 350" : "20",
+        "MACHRAY HALL 419" : "30",
+        "ST. JOHN'S COLLEGE 204" : "33",
         "UNIVERSITY COLLEGE 235" : "36",
         "UNIVERSITY COLLEGE 237" : "128",
         "UNIVERSITY COLLEGE 240" : "198",
         "WALLACE 221" : "160",
         "WALLACE 223" : "160",
-	"TBA" : "TBA"
+        "TBA" : "TBA"
 }
 
 def foundBldg ( line):
@@ -60,7 +64,7 @@ def get_next(page):
    try:
       ret = striphtml(next(page)).strip()
    except StopIteration:
- 	 ret = None
+         ret = None
    return ret
 
 roomDict = dict()
@@ -81,7 +85,7 @@ def get_crn_list(termcode, typecode):
   crns = []
   x = r.iter_lines()
   for line in x:
-    match = re.search('^<TH CL.*>([^\[\]]+) - (.+) - (.+) - (['+typecode+']..)</A></TH>$', line)
+    match = re.search('^<th CLASS.*>([^\[\]]+) - (.+) - (.+) - (['+typecode+']..)</a></th>$', line)
     if match:
        crn = match.group(2)
        crns.append(match.group(2))
@@ -113,6 +117,7 @@ typecode = sys.argv[2]
 crns = get_crn_list(term,typecode);
 for crn in crns:
     url = 'https://aurora.umanitoba.ca/banprod/bwckschd.p_disp_detail_sched?term_in=' + term + '&crn_in=' + crn
+    #print(url)
     page = urllib2.urlopen(url)
     out = ''
     for line in page:
@@ -128,13 +133,13 @@ for crn in crns:
           room += roomDict[crn]
         else:
           room += 'UNKNOWN'
-		  
-		#append room capacity
+
+                #append room capacity
         if roomDict[crn] in roomCapacities:
           room += " (seats: "+str(roomCapacities[roomDict[crn]])+")";
         else:
           room += " (seat capacity unknown)"
-		  
+
         print ("\t",out,'Waitlist',l2, room)
         break
       if 'Seats' in line:
