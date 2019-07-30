@@ -11,7 +11,7 @@ import requests
 #        implement better checking for when building is not found.
 #        beautifulsoup everything.
 
-buildings = ['TIER', 'AGRICULTURE', 'ALLEN', 'ANIMAL SCIENCE', 'ARMES', 'Art Lab', 'Music', 'DUFF ROBLIN', 'EDUCATION', 'ELLIS', 'FLETCHER ARGUE', 'FRANK KENNEDY', 'MACHRAY', 'Distance and On-Line Education', 'HELEN GLASS', 'EITC', 'TBA', 'DRAKE', 'ST. JOHN', 'ST. PAUL' ,'UNIVERSITY COLLEGE']
+buildings = ['TIER', 'AGRICULTURE', 'ALLEN', 'ANIMAL SCIENCE', 'ARMES', 'Art Lab', 'Music', 'DUFF ROBLIN', 'EDUCATION', 'ELLIS', 'FLETCHER ARGUE', 'FRANK KENNEDY', 'MACHRAY', 'Distance and On-Line Education', 'HELEN GLASS', 'EITC', 'TBA', 'DRAKE', 'ST. JOHN', 'ST. PAUL' ,'UNIVERSITY COLLEGE', 'RUSSELL']
 
 #PULLED from AD-ASTRA August 2018. May be dated. Not trivial to automatically pull since it uses sessions in cookies
 roomCapacities = {
@@ -43,6 +43,7 @@ roomCapacities = {
 	"HELEN GLASS CENTRE 260" : "108",
 	"HELEN GLASS CENTRE 350" : "20",
         "MACHRAY HALL 419" : "30",
+        "RUSSELL 214" : "130",
 	"ST. JOHN'S COLLEGE 204" : "33",
         "TIER 206" : "169",
         "TIER 306" : "176",
